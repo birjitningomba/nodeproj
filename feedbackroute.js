@@ -3,7 +3,7 @@ const FeedbackRoute = express.Router();
 
 const Feedback = require('./feedback');
 
-FeedbackRoute.route('/create').post(function (req, res) {
+FeedbackRoute.route('/create').get(function (req, res) {
   const feedback = new Feedback();
   feedback.from = req.query.from;
   feedback.message = req.query.message;
@@ -12,7 +12,6 @@ FeedbackRoute.route('/create').post(function (req, res) {
   feedback.sent = Date();
   feedback.save()
     .then(feedback => {
-     
       res.json('Feedback entered successfully');
     })
     .catch(err => {
